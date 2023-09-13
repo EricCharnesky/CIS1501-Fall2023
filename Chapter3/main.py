@@ -104,3 +104,29 @@ classes = ('CIS 1501', 'CIS 2001', 'CIS 350', 'IMSE 317', 'MAT 170')
 print(classes[3])
 # tuples are immutable - can't change values
 #classes[3] = 'Probability and Statistics, with calculus!'
+
+
+# dictionaries create a set of keys with associated values
+classes_and_names = { "CIS 1501" : "CS1 for Data Scientists", "CIS 2001" : "CS2 for Data Scientists"}
+print(classes_and_names)
+
+# add a key and associated value - [] 'means' key of
+classes_and_names['MATH 150'] = "Calc 1"
+
+classes_and_names['PHYS 125'] = "Introductory Physics"
+
+
+# UPDATE the value associated with a key
+classes_and_names['MATH 150'] = 'Derivitive Calculus'
+
+# to get the value associated with a key
+print("The name of MATH 150 is", classes_and_names['MATH 150'])
+
+print(classes_and_names)
+
+
+test_numbers = [1,2,3]
+print(test_numbers[0], "some text")
+answer = input(str(test_numbers[0]) + " some text")
+
+print("4.9 as an int is", int(4.9))
