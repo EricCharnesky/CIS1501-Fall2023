@@ -12,15 +12,21 @@ while guess < 1 or guess > max_number:
 
 number_of_guesses = 1
 # runs as long as the expression is true
-while guess != number_to_guess:
+while guess != number_to_guess and number_of_guesses <= 5:
 
     if guess < number_to_guess:
         print("Too low!")
     elif guess > number_to_guess:
         print("Too high!")
 
+    # ends the loop - but in a confusing spot
+    if number_of_guesses == 5:
+        break
+
     guess = int(input(f"Guess a number 1 - {max_number}: "))
     number_of_guesses += 1
+
+
 
 print(f"You guessed it in {number_of_guesses} guesses!")
 
@@ -124,4 +130,87 @@ for hour in range(24):
     for minute in range(60):
         for second in range(60):
             print(f'{hour:02d}:{minute:02d}:{second:02d}')
+
+
+choice = input("This, that or quit")
+
+# this works, but Eric thinks it's ugly
+while True:
+    if choice == "quit":
+        break # ends the loop immediately
+    # code continues here
+
+while choice != "quit":
+    if choice == "this":
+        print("do this")
+
+
+play_again = "y"
+
+while play_again == "y":
+    # do project 1
+
+
+    play_again = input("Play again y/n ?")
+
+
+for number in range(10):
+    if number % 2 == 0:
+        continue # loop body ends, jumps to the top
+    print(number)
+
+    # range 3rd option is the `counting by`
+for number in range(1, 10, 2):
+    print(number)
+
+                            # step
+for number in range(10, 0, -1):
+    print(number)
+
+for number in range(10, 0): # needs the -1
+    print(number)
+
+are_you_bored = 'n'
+
+while are_you_bored == "n":
+    print("Happy Wednesday")
+    are_you_bored = input("are you bored? y/n or quit")
+    if are_you_bored == "quit":
+        break # if you break, the loop else won't run
+else:
+    print("Ended normally")
+
+
+numbers = []
+
+number = 0
+
+while number != -1:
+    number = int(input("Enter a number or -1 to stop"))
+    if number != -1:
+        numbers.append(number)
+
+print(numbers)
+
+for index in range(len(numbers)):
+    print(f"numbers list, index {index} value{numbers[index]}")
+
+# gets a copy of the value
+for value in numbers:
+    value = value + 10
+    # doesn't change the value stored IN the list
+    print(value)
+
+for index in range(len(numbers)):
+    numbers[index] += 10 # this will change the value in the list
+    print(numbers[index])
+
+for index, value in enumerate(numbers): # shortcut to get both index and value
+    print(f"numbers {index} : value {value}")
+
+print(numbers)
+
+
+
+
 
