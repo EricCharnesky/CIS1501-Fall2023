@@ -1,31 +1,50 @@
 def did_someone_win_horizontally(board):
     for row in board:
-        if row[0] != ' ' and row[0] == row[1] == row[2]:
-            return True
+        for column_index in range(4): # 0, 1, 2, 3
+            if (row[column_index] != ' ' and row[column_index] == row[column_index+1] \
+                    == row[column_index+2] == row[column_index+3]):
+                return True
     return False
 
 
 def did_someone_win_vertically(board):
-    for column in range(3): # values 0-2
-        if board[0][column] != " " and \
-            board[0][column] == board[1][column] == board[2][column]:
-            return True
+    for column_index in range(7): # values 0-6
+        for row_index in range(3): # 0, 1, 2
+            if board[row_index][column_index] != " " and \
+                board[row_index][column_index] == board[row_index+1][column_index] \
+                == board[row+2][column_index] == board[row+3][column_index]:
+                return True
     return False # didn't find a matching vertical
 
 
 
-def did_someone_win_diagonally(board):
-    return board[1][1] != " " and ( ( board[0][0] == board[1][1] == board[2][2] ) \
-        or ( board[0][2] == board[1][1] == board[2][0] ) )
+def did_someone_win_diagonally_up(board):
+    for row_index in range(3,6): # bottom three rows 3, 4, 5
+        for column_index in range(0, 4): # first 4 columns , 0, 1, 2, 3
+            if (board[row_index][column_index] != " " and \
+                board[row_index][column_index] == board[row_index - 1][column_index + 1] ==
+                    board[row_index - 2][column_index + 2] == board[row_index - 3][column_index + 3]):
+                return True
+    return False
+
+
+def did_someone_win_diagonally_down(board):
+    for row_index in range(0, 3): # top three rows 0, 1, 2
+        for column_index in range(0, 4): # first 4 columns , 0, 1, 2, 3
+            if (board[row_index][column_index] != " " and \
+                board[row_index][column_index] == board[row_index + 1][column_index + 1] ==
+                    board[row_index + 2][column_index + 2] == board[row_index + 3][column_index + 3]):
+                return True
+    return False
 
 
 def did_someone_win(board):
     return did_someone_win_horizontally(board) or \
         did_someone_win_vertically(board) or \
-        did_someone_win_diagonally(board)
+        did_someone_win_diagonally_up(board) or \
+        did_someone_win_diagonally_down(board)
 
-
-def is_cats_game(board):
+def is_tied(board):
     for row in board:
         if " " in row:
             return False
@@ -33,7 +52,7 @@ def is_cats_game(board):
 
 
 def is_game_over(board):
-    return did_someone_win(board) or is_cats_game(board)
+    return did_someone_win(board) or is_tied(board)
 
 def print_board(board):
     for row in board:
@@ -47,7 +66,7 @@ def make_move(board, current_player):
         column = int(input("enter the column # 0 - 2"))
 
     # find first open row starting at 5 going up
-    for row_index in range(5, -1, -1): # gives 5, 4, 3, 2, 1, 0
+    for row_index in [5, 4, 3, 2, 1, 0]: # range(5, -1, -1): # gives 5, 4, 3, 2, 1, 0
         if board[row_index][column] == " ":
             board[row_index][column] = current_player
             break
@@ -60,7 +79,7 @@ board = []
 for row in range(6):
     board.append([])
     for column in range(7):
-        board.append(' ')
+        board[row].append(' ')
 
 current_player = 'X'
 
