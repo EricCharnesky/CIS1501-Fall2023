@@ -1,5 +1,6 @@
 import random
 
+
 class ElectricCar:
 
     def __init__(self, make, model, color, max_kilowatt_hours_in_battery, kilometers_per_kilowatt_hour):
@@ -65,6 +66,8 @@ class Chair:
         self.minimum_height_in_centimeters = 45
         self.maximum_height_in_centimeters = 125
 
+    def __str__(self):
+        return "I'm a chair!" # FIX ME
     def get_color(self):
         return self._color
 
@@ -92,7 +95,10 @@ def print_car(car):
     print("Odometer", car.get_odometer())
     print("Current Kilowatt Hours", car.get_current_kilowatt_hours_in_battery())
 
+
 erics_chair = Chair() # calls the __init__ functions
+
+print(erics_chair)
 
 erics_chair_color = "blue"
 erics_chair_has_wheels = True
