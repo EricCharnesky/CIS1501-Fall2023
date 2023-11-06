@@ -26,11 +26,15 @@ class Student:
     def get_name(self):
         return self._name
 
+    def set_name(self, name):
+        self._name = name
+
     def add_assignment(self, assignment):
         self._assignments.append(assignment)
 
     def get_assignments(self):
         return self._assignments
+
 
 class Gradebook:
 
@@ -39,8 +43,13 @@ class Gradebook:
         self._students = []
 
     def add_student(self, student):
-        # copy assignments from another student
         self._students.append(student)
+        if len(self._students) != 1: # if it's 1, it's the first student
+            student_to_copy = self._students[0]
+            for assignment_to_copy in student_to_copy.get_assignments():
+                # makes a new assignment to avoid getting a copy of the score
+                copy = Assignment(assignment_to_copy.get_name(), assignment_to_copy.get_points_possible())
+                student.add_assignment(copy)
 
     def add_assignment(self, assignment):
         # add assignment to each student in list
@@ -48,7 +57,12 @@ class Gradebook:
             student.add_assignment(assignment)
 
     def score_assignment(self, assignment_name):
-        # loop through each student, try and find the assignment that matches the name and then get the score
+        for student in self._students:
+            for assignment in student.get_assignments():
+                if assignment.get_name() == assignment_name:
+                    score = int(input("Enter the score for " + student.get_name() +
+                                      " - total points possible: " + str(assignment.get_points_possible())))
+                    assignment.set_score(score)
 
     def get_students(self):
         return self._students
@@ -56,20 +70,30 @@ class Gradebook:
 
 cis1501 = Gradebook("CIS 1501")
 
-choice = input("Add student, add assignment, score assignment")
+choice = ""
 
-if choice == "Add student":
-    name = input("Enter the student's name")
+while choice != "quit":
 
+    if choice == "add student":
+        name = input("Enter the student's name")
+        new_student = Student(name)
+        cis1501.add_student(new_student)
 
-elif choice == "add assignment":
-    assignment_name = input("Enter the assignment name")
-    points_possible = int(input("How many points possible"))
-    assignment = Assignment(assignment_name, points_possible)
-    cis1501.add_assignment(assignment)
+    elif choice == "add assignment":
+        assignment_name = input("Enter the assignment name")
+        points_possible = int(input("How many points possible"))
+        assignment = Assignment(assignment_name, points_possible)
+        cis1501.add_assignment(assignment)
+
+    elif choice == "score assignment":
+        assignment_name = input("Enter the assignment name")
+        cis1501.score_assignment(assignment_name)
+
+    choice = input("Add student, add assignment, score assignment, or quit").lower()
+
 
 
 for student in cis1501.get_students():
     print(student.get_name())
     for assignment in student.get_assignments():
-        print("Assignment", assignment.get_name())
+        print("Assignment", assignment.get_name(), "score", assignment.get_score(), "out of", assignment.get_points_possible())

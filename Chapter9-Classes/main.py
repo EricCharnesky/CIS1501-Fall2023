@@ -22,7 +22,7 @@ class ElectricCar:
             self._current_kilowatt_hours_in_battery -= number_of_kilometers / self._kilometers_per_kilowatt_hour
             self._odometer_in_kilometers += number_of_kilometers
             return True
-        return False
+        raise ValueError("Not enough charge to drive that far!")
 
     def get_max_kilowatt_hours_in_battery(self):
         return self._max_kilowatt_hours_in_battery
@@ -96,50 +96,68 @@ def print_car(car):
     print("Current Kilowatt Hours", car.get_current_kilowatt_hours_in_battery())
 
 
-erics_chair = Chair() # calls the __init__ functions
+# prevents this code from running, unless this module was the file ran, not imported
+if __name__ == '__main__':
 
-print(erics_chair)
+    erics_chair = Chair() # calls the __init__ functions
 
-erics_chair_color = "blue"
-erics_chair_has_wheels = True
+    print(erics_chair)
 
-# changes the value of the attribute
-erics_chair.color = "blue"
+    erics_chair_color = "blue"
+    erics_chair_has_wheels = True
 
-jebs_chair = Chair()
-jebs_chair.has_wheels = False
+    # changes the value of the attribute
+    erics_chair.color = "blue"
 
-print("Eric's Chair:")
-print(erics_chair.get_height_of_seat_in_centimeters())
-print(erics_chair.has_wheels)
+    jebs_chair = Chair()
+    jebs_chair.has_wheels = False
 
-print("Jebs's Chair:")
-print(jebs_chair.get_height_of_seat_in_centimeters())
-print(jebs_chair.has_wheels)
+    print("Eric's Chair:")
+    print(erics_chair.get_height_of_seat_in_centimeters())
+    print(erics_chair.has_wheels)
 
-erics_chair.change_height(500)
-#print(erics_chair._height_of_seat_in_centimeters)
-erics_chair._height_of_seat_in_centimeters = 500
-#print(erics_chair._height_of_seat_in_centimeters)
+    print("Jebs's Chair:")
+    print(jebs_chair.get_height_of_seat_in_centimeters())
+    print(jebs_chair.has_wheels)
+
+    erics_chair.change_height(500)
+    #print(erics_chair._height_of_seat_in_centimeters)
+    erics_chair._height_of_seat_in_centimeters = 500
+    #print(erics_chair._height_of_seat_in_centimeters)
 
 
 
-# work with functions absrtactly - we don't know the details
-print(random.randint(1, 100))
+    # work with functions absrtactly - we don't know the details
+    print(random.randint(1, 100))
 
-erics_car = ElectricCar("Chevy", "Bolt", "Grey", 133, 5)
+    erics_car = ElectricCar("Chevy", "Bolt", "Grey", 133, 5)
 
-print(erics_car.get_make())
+    print(erics_car.get_make())
 
-#jasmines_van = Car("Ford", "Transit", "Blue Jean")
+    #jasmines_van = Car("Ford", "Transit", "Blue Jean")
 
-#print(jasmines_van.get_make())
-erics_car.charge(150)
-print_car(erics_car)
-#print_car(jasmines_van)
+    #print(jasmines_van.get_make())
+    erics_car.charge(150)
+    print_car(erics_car)
+    #print_car(jasmines_van)
 
-erics_car.drive(47)
+    erics_car.drive(47)
 
-print_car(erics_car)
-#print_car(jasmines_van)
+    print_car(erics_car)
+    #print_car(jasmines_van)
+
+    while True:
+        try:
+            erics_car.drive(int(input("How many KM do you want to drive?")))
+            erics_car.drive(int(input("How many KM do you want to drive?")))
+            erics_car.drive(int(input("How many KM do you want to drive?")))
+
+            break
+        except Exception as e:
+            print(e)
+
+
+
+    some_list = []
+    print(some_list[1])
 
