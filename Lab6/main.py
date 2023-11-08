@@ -69,6 +69,9 @@ class Gradebook:
 
 
 cis1501 = Gradebook("CIS 1501")
+cis1501.add_student("Eric")
+cis1501.get_students()[0].add_assignment("test 1", 10)
+cis1501.get_students()[0].get_assignments()[0].set_score(10)
 
 choice = ""
 
