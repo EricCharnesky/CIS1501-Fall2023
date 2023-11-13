@@ -24,6 +24,12 @@ class PowerBallTicket:
 
     def get_winnings(self, winning_ticket):
         number_of_white_matches = len(set(self._values[:5]).intersection(winning_ticket.get_values()[:5]))
+
+        # intersect is a shortcut for this loop
+        #for number in self._values[:5]:
+        #    if number in winning_ticket.get_values()[:5]:
+        #        number_of_white_matches += 1
+
         red_matches = self._values[5] == winning_ticket.get_values()[5]
 
         if number_of_white_matches == 5 and red_matches:
