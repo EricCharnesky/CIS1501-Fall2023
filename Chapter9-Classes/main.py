@@ -21,8 +21,8 @@ class ElectricCar:
         if 0 < number_of_kilometers <= self._current_kilowatt_hours_in_battery * self._kilometers_per_kilowatt_hour:
             self._current_kilowatt_hours_in_battery -= number_of_kilometers / self._kilometers_per_kilowatt_hour
             self._odometer_in_kilometers += number_of_kilometers
-            return True
-        raise ValueError("Not enough charge to drive that far!")
+        else:
+            raise ValueError("Not enough charge to drive that far!")
 
     def get_max_kilowatt_hours_in_battery(self):
         return self._max_kilowatt_hours_in_battery
@@ -67,7 +67,9 @@ class Chair:
         self.maximum_height_in_centimeters = 125
 
     def __str__(self):
-        return "I'm a chair!" # FIX ME
+        return (f"{self._color} chair with the seat set to {self._height_of_seat_in_centimeters} "
+                f"cm with { 'wheels' if self.has_wheels else 'no wheels'}") # FIX ME
+
     def get_color(self):
         return self._color
 
@@ -101,6 +103,8 @@ if __name__ == '__main__':
 
     erics_chair = Chair() # calls the __init__ functions
 
+    print(erics_chair)
+    erics_chair.has_wheels = False
     print(erics_chair)
 
     erics_chair_color = "blue"
