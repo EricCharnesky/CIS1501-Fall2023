@@ -66,6 +66,6 @@ numbers = []
 for number in range(6):
     numbers.append(int(input("Enter a lotto number")))
 
-with open("lotto.txt", 'w') as lotto_file:
-    lotto_file.write(" ".join(str(number) for number in numbers))
+with open("lotto.txt", 'a') as lotto_file:
+    lotto_file.write(" ".join(str(number) for number in numbers) + "\n")
 
